@@ -31,13 +31,14 @@ public class SearchFragment extends Fragment {
         View root = binding.getRoot();
 
         List<ListEntity> strings = new ArrayList<>();
-        for (int i = 0; i < 20; i++)
-            strings.add(
-                    new ListEntity(
-                            "Header #" + i+1,
-                            "Описание #" + i
-                    )
-            );
+//        for (int i = 0; i < 20; i++)
+//            strings.add(
+//                    new ListEntity(
+//                            "Header #" + i+1,
+//                            "Описание #" + i,
+//                            "vk.com"
+//                    )
+//            );
 
         Adapter adapter = new Adapter(getActivity(), strings);
 

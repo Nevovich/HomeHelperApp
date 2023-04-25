@@ -27,11 +27,18 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/backBtn"
+        app:layout_constraintBottom_toTopOf="@+id/createLink"
         android:layout_marginBottom="16dp"
         android:id="@+id/createDescription"
         android:hint="Описание статьи"
         />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/backBtn"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/createLink"
+        android:hint="Ссылка на видеоинструкцию"/>
     <Button
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
