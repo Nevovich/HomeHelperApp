@@ -2,7 +2,6 @@ package com.example.saturdayapp.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -22,7 +20,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -34,6 +31,7 @@ public class HomeFragment extends Fragment {
     private DatabaseReference articleDB;
     private String LIST_KEY = "allArticles";
     private List<ListEntity> articles = new ArrayList<>();
+    private boolean numberStart = false;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,7 +54,7 @@ public class HomeFragment extends Fragment {
         articleDB = FirebaseDatabase.getInstance().getReference(LIST_KEY);
         articleDB.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 articles.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     for(DataSnapshot ds2 : ds.getChildren()) {
@@ -64,21 +62,30 @@ public class HomeFragment extends Fragment {
                         articles.add(animal);
                     }
                 }
+
+                if (!numberStart) {
+                    Adapter adapter = new Adapter(getActivity(), articles);
+                    binding.recyclerView
+                            .setLayoutManager(new LinearLayoutManager(getActivity()));
+                    binding.recyclerView.setAdapter(adapter);
+                    numberStart = true;
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Toast.makeText(getActivity(), "Ошибка чтения", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Ошибка чтения БД", Toast.LENGTH_SHORT).show();
             }
         });
 
-        Adapter adapter = new Adapter(getActivity(), articles);
 
-        binding.recyclerView
-                .setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.recyclerView.setAdapter(adapter);
-
+        if (numberStart) {
+            Adapter adapter = new Adapter(getActivity(), articles);
+            binding.recyclerView
+                    .setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.recyclerView.setAdapter(adapter);
+        }
         return root;
     }
 
