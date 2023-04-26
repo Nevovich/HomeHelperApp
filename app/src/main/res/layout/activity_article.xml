@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ArticleActivity"
+    android:paddingHorizontal="20dp">
+
+    <TextView
+        android:id="@+id/articleHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Заголовок статьи"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/articleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Основной текст статьи"
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>

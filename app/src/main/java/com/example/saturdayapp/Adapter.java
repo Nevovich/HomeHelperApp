@@ -52,7 +52,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     ) {
         ListEntity item = data.get(position);
         holder.header.setText(item.getHeader());
-        holder.description.setText(item.getDescription());
+//        Укорачивание описания инструкции
+        String shortDesc = item.getDescription().replace('\n', ' ');
+        int limit = 100;
+        String subStr = shortDesc.length() > limit ? shortDesc.substring(0, limit) + "..." : shortDesc;
+        holder.description.setText(subStr);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

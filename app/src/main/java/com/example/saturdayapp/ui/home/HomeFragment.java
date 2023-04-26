@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.saturdayapp.Adapter;
+import com.example.saturdayapp.ArticleActivity;
 import com.example.saturdayapp.CreateActivity;
 import com.example.saturdayapp.ListEntity;
 import com.example.saturdayapp.RecyclerViewItemClickListener;
@@ -38,8 +39,10 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ListEntity item = articles.get(position);
-                Toast.makeText(getActivity(), "Проиозошло нажатие на элемент " + articles.get(position).getArticleID(), Toast.LENGTH_SHORT).show();
+//                ListEntity item = articles.get(position);
+                Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                intent.putExtra("uniqueID", articles.get(position).getArticleID());
+                startActivity(intent);
             }
         });
         binding.recyclerView
