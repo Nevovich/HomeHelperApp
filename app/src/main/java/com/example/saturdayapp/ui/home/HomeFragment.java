@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.saturdayapp.Adapter;
 import com.example.saturdayapp.CreateActivity;
 import com.example.saturdayapp.ListEntity;
+import com.example.saturdayapp.RecyclerViewItemClickListener;
 import com.example.saturdayapp.databinding.FragmentHomeBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +33,20 @@ public class HomeFragment extends Fragment {
     private String LIST_KEY = "allArticles";
     private List<ListEntity> articles = new ArrayList<>();
     private boolean numberStart = false;
-
+    private void adapterCall() {
+        Adapter adapter = new Adapter(getActivity(), articles);
+        adapter.setOnItemClickListener(new RecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ListEntity item = articles.get(position);
+                Toast.makeText(getActivity(), "Проиозошло нажатие на элемент " + articles.get(position).getArticleID(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        binding.recyclerView
+                .setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerView.setAdapter(adapter);
+        numberStart = true;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +64,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         articleDB = FirebaseDatabase.getInstance().getReference(LIST_KEY);
         articleDB.addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,17 +72,11 @@ public class HomeFragment extends Fragment {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     for(DataSnapshot ds2 : ds.getChildren()) {
                         ListEntity animal = ds2.getValue(ListEntity.class);
+                        animal.setArticleID(ds.getKey());
                         articles.add(animal);
                     }
                 }
-
-                if (!numberStart) {
-                    Adapter adapter = new Adapter(getActivity(), articles);
-                    binding.recyclerView
-                            .setLayoutManager(new LinearLayoutManager(getActivity()));
-                    binding.recyclerView.setAdapter(adapter);
-                    numberStart = true;
-                }
+                if (!numberStart) adapterCall();
             }
 
             @Override
@@ -80,12 +87,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-        if (numberStart) {
-            Adapter adapter = new Adapter(getActivity(), articles);
-            binding.recyclerView
-                    .setLayoutManager(new LinearLayoutManager(getActivity()));
-            binding.recyclerView.setAdapter(adapter);
-        }
+        if (numberStart) adapterCall();
         return root;
     }
 

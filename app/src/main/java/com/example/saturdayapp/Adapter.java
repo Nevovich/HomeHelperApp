@@ -3,6 +3,7 @@ package com.example.saturdayapp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -19,6 +20,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private final List<ListEntity> data; // данные для вывода в список
     private final LayoutInflater localInflater; // "раздуватель" с контекстом
+    private RecyclerViewItemClickListener clickListener; // слушатель нажатия
+
+    public void setOnItemClickListener(RecyclerViewItemClickListener listener) {
+        clickListener = listener;
+    }
+
 
     public Adapter(Context context, List<ListEntity> data) {
         this.data = data;
@@ -46,6 +53,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         ListEntity item = data.get(position);
         holder.header.setText(item.getHeader());
         holder.description.setText(item.getDescription());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (clickListener != null) {
+                    clickListener.onItemClick(view, holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     // Возвращает размер списка данных, нужно для внутренней работы ресайклера

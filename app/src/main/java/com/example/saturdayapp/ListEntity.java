@@ -17,6 +17,7 @@ public class ListEntity {
     }
 
 
+    public void setArticleID(String articleID) { this.articleID = articleID; }
 
     public String getArticleID() { return articleID; }
 
