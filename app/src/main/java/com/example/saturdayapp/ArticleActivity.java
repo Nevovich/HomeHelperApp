@@ -3,8 +3,12 @@ package com.example.saturdayapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.example.saturdayapp.databinding.ActivityArticleBinding;
@@ -17,9 +21,12 @@ import com.google.firebase.database.ValueEventListener;
 public class ArticleActivity extends AppCompatActivity {
 
     private ActivityArticleBinding binding;
-    private String articleHeader, articleDescription, articleVideoLink;
+    private String articleHeader, articleDescription, articleVideoLink, articleID;
+    WebView youtubeWebView;
 
 
+
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +34,20 @@ public class ArticleActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Bundle arguments = getIntent().getExtras();
-        String articleID = arguments.getString("uniqueID");
+        articleID = arguments.getString("uniqueID");
+
+//        Youtube embeddind
+        youtubeWebView = binding.youtubeWebView;
+        youtubeWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
+        WebSettings webSettings = youtubeWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
 
 
 
@@ -38,6 +58,10 @@ public class ArticleActivity extends AppCompatActivity {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                         binding.articleHeader.setText(ds.child("header").getValue().toString());
                         binding.articleText.setText(ds.child("description").getValue().toString());
+                        articleVideoLink = ds.child("videoLink").getValue().toString();
+                        youtubeWebView.loadUrl("https://www.youtube.com/embed/" + articleVideoLink);
+                        articleVideoLink = binding.videolinkAnnotation.getText() + articleVideoLink;
+                        binding.videolinkAnnotation.setText(articleVideoLink);
                 }
             }
             @Override

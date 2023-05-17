@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private DatabaseReference articleDB;
-    private String LIST_KEY = "allArticles";
+    private final String LIST_KEY = "allArticles";
     private List<ListEntity> articles = new ArrayList<>();
     private boolean numberStart = false;
     private void adapterCall() {
@@ -39,7 +39,6 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                ListEntity item = articles.get(position);
                 Intent intent = new Intent(getActivity(), ArticleActivity.class);
                 intent.putExtra("uniqueID", articles.get(position).getArticleID());
                 startActivity(intent);
@@ -83,7 +82,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
                 Toast.makeText(getActivity(), "Ошибка чтения БД", Toast.LENGTH_SHORT).show();
             }
