@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     android:paddingHorizontal="@dimen/default_horiz_padding"
-    tools:context=".CreateActivity"
-    android:gravity="center">
+    tools:context=".EditArticleActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,14 +15,14 @@
         app:layout_constraintBottom_toTopOf="@id/createHeader"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Создание новой статьи"
+        android:text="Редактирование статьи"
         android:layout_marginBottom="20dp"
         android:textSize="28sp"
         android:textStyle="bold"
         />
 
     <EditText
-        android:id="@+id/createHeader"
+        android:id="@+id/editArticleHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -32,7 +32,7 @@
         tools:layout_editor_absoluteX="20dp" />
 
     <EditText
-        android:id="@+id/createDescription"
+        android:id="@+id/editArticleDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -42,7 +42,7 @@
         android:inputType="textMultiLine" />
 
     <EditText
-        android:id="@+id/createLink"
+        android:id="@+id/editArticleLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ссылка на видеоинструкцию"
@@ -52,18 +52,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/createLinkNotice"
+        android:id="@+id/editArticleNotice"
         app:layout_constraintTop_toBottomOf="@id/createLink"
         android:textSize="12sp"
         android:text="В формате youtube.com/watch?v=dQw4w9WgXcQ \nили youtu.be/dQw4w9WgXcQ"
         />
     <Button
-        android:id="@+id/backBtn"
+        android:id="@+id/confirmEditBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Добавить"
+        android:text="Применить изменения"
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"/>
-
-
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

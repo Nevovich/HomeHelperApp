@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -91,6 +92,10 @@ public class ArticleActivity extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.action_bar_edit_article:
+                this.finish();
+                Intent intent = new Intent(ArticleActivity.this, EditArticleActivity.class);
+                intent.putExtra("uniqueID", articleID);
+                startActivity(intent);
                 this.finish();
                 return true;
         }
