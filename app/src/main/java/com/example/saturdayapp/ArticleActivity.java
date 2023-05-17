@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -18,10 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class ArticleActivity extends AppCompatActivity {
 
     private ActivityArticleBinding binding;
-    private String articleHeader, articleDescription, articleVideoLink, articleID;
+    private String articleAuthorID, articleVideoLink, articleID;
     WebView youtubeWebView;
 
 
@@ -62,6 +65,7 @@ public class ArticleActivity extends AppCompatActivity {
                         youtubeWebView.loadUrl("https://www.youtube.com/embed/" + articleVideoLink);
                         articleVideoLink = binding.videolinkAnnotation.getText() + articleVideoLink;
                         binding.videolinkAnnotation.setText(articleVideoLink);
+                        articleAuthorID = ds.child("authorID").getValue().toString();
                 }
             }
             @Override
@@ -71,10 +75,22 @@ public class ArticleActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (Objects.equals(LoginActivity.getLoggedInUserUID(), articleAuthorID)) {
+            getMenuInflater().inflate(R.menu.article, menu);
+        }
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.action_bar_edit_article:
                 this.finish();
                 return true;
         }

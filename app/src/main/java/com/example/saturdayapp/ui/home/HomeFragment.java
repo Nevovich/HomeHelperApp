@@ -16,6 +16,7 @@ import com.example.saturdayapp.Adapter;
 import com.example.saturdayapp.ArticleActivity;
 import com.example.saturdayapp.CreateActivity;
 import com.example.saturdayapp.ListEntity;
+import com.example.saturdayapp.LoginActivity;
 import com.example.saturdayapp.RecyclerViewItemClickListener;
 import com.example.saturdayapp.databinding.FragmentHomeBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -57,6 +58,10 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        if (LoginActivity.getLoggedInUserUID().isEmpty()) {
+            binding.addFab.hide();
+        }
+
 //        Переход в активность создания
         binding.addFab.setOnClickListener(new View.OnClickListener() {
             @Override

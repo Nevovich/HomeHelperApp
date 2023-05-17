@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/default_horiz_padding"
+    android:paddingVertical="@dimen/default_horiz_padding"
+    tools:context=".RegisterActivity"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вход в аккаунт"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"
+        />
+
+    <EditText
+        android:id="@+id/registerEmailInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Введите e-mail"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/registerPasswordInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Введите пароль"
+        android:inputType="textPassword"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:id="@+id/registerPasswordInput2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Пароль повторно"
+        android:inputType="textPassword"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Создать аккаунт"
+        android:paddingHorizontal="25dp"
+        android:layout_marginBottom="15dp"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>

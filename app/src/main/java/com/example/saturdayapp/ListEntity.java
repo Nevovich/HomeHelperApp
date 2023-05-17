@@ -5,17 +5,20 @@ public class ListEntity {
     private String articleID;
     private String description;
     private String videoLink;
+    private String authorID;
 
     public ListEntity() {
     }
 
-    public ListEntity(String articleID, String header, String description, String videoLink) {
+    public ListEntity(String articleID, String header, String description, String videoLink, String authorID) {
         this.articleID = articleID;
         this.header = header;
         this.description = description;
         this.videoLink = videoLink;
+        this.authorID = authorID;
     }
 
+    public String getAuthorID() { return authorID; }
 
     public void setArticleID(String articleID) { this.articleID = articleID; }
 

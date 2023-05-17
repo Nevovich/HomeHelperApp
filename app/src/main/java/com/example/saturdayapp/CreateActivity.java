@@ -49,7 +49,8 @@ public class CreateActivity extends AppCompatActivity {
                     articleToAdd.add(new ListEntity( articleDB.getKey(),
                             articleHeader,
                             articleDescription,
-                            articleVideoLink.subSequence(articleVideoLink.length()-11, articleVideoLink.length()).toString()
+                            articleVideoLink.subSequence(articleVideoLink.length()-11, articleVideoLink.length()).toString(),
+                            LoginActivity.getLoggedInUserUID()
                     ));
 //                Загрузка на сервер данных
                     articleDB.push().setValue(articleToAdd);
