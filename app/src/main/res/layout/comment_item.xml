@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingVertical="10dp"
+    android:paddingHorizontal="15dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/authorNick"
+    tools:text="impressGirl"
+    android:textStyle="bold"
+    android:layout_marginBottom="10dp"
+    android:textColor="@color/purple_700"
+    />
+    <TextView
+        android:id="@+id/commentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        tools:text="Есть много вариантов Lorem Ipsum, но большинство из них имеет не всегда приемлемые модификации, например, юмористические вставки или слова, которые даже отдалённо не напоминают латынь. Если вам нужен Lorem Ipsum для серьёзного проекта, вы наверняка не хотите какой-нибудь шутки, скрытой в середине абзаца. Также все другие известные генераторы Lorem Ipsum используют один и тот же текст, который они просто повторяют, пока не достигнут нужный объём."
+        />
+    <TextView
+        android:id="@+id/commentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="17:21 18.10.04"
+        android:textSize="12sp"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>

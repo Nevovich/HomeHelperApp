@@ -1,7 +1,5 @@
 package com.example.saturdayapp;
 
-import android.content.Intent;
-
 public class ListEntity {
     private String header;
     private String articleID;

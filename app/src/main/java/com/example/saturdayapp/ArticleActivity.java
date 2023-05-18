@@ -2,12 +2,14 @@ package com.example.saturdayapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ArticleActivity extends AppCompatActivity {
@@ -28,6 +32,17 @@ public class ArticleActivity extends AppCompatActivity {
     private String articleAuthorID, articleVideoLink, articleID;
     WebView youtubeWebView;
     private Integer articleTaskTime;
+    private boolean numberStart = false;
+    private DatabaseReference commentsDB;
+    private List<CommentsEntity> comments = new ArrayList<CommentsEntity>();
+
+    private void commentsAdapterCall() {
+        CommentsAdapter adapter = new CommentsAdapter(ArticleActivity.this, comments);
+        binding.commentsRecycler
+                .setLayoutManager(new LinearLayoutManager(ArticleActivity.this));
+        binding.commentsRecycler.setAdapter(adapter);
+        numberStart = true;
+    }
 
 
 
@@ -55,7 +70,6 @@ public class ArticleActivity extends AppCompatActivity {
         webSettings.setUseWideViewPort(true);
 
 
-
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("allArticles");
         databaseReference1.child(articleID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -73,11 +87,33 @@ public class ArticleActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+//        Comments section
+        commentsDB = FirebaseDatabase.getInstance().getReference("allComments");
+        commentsDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                comments.clear();
+                    for(DataSnapshot ds2 : dataSnapshot.getChildren()) {
+                        CommentsEntity animal = ds2.getValue(CommentsEntity.class);
+                        if (Objects.equals(animal.getParentArticleID(), articleID)) {
+                            comments.add(animal);
+                        }
+                    }
+                if (!numberStart) commentsAdapterCall();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(ArticleActivity.this, "Ошибка чтения БД", Toast.LENGTH_SHORT).show();
+            }
+        });
+        if (numberStart) commentsAdapterCall();
     }
 
     @Override

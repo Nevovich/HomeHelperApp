@@ -70,15 +70,27 @@
         android:autoLink="web"
         android:layout_marginBottom="30dp"
         android:focusable="true" />
-
-
     <TextView
         android:id="@+id/articleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Основной текст статьи"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="35dp"
         android:textSize="18sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Комментарии"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/comment_item"
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
