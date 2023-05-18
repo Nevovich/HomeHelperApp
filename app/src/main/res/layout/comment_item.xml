@@ -5,7 +5,10 @@
     android:paddingVertical="10dp"
     android:paddingHorizontal="15dp"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:backgroundTint="#EEEEEE"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/round_corners"
+    android:layout_height="wrap_content">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -20,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        tools:text="Есть много вариантов Lorem Ipsum, но большинство из них имеет не всегда приемлемые модификации, например, юмористические вставки или слова, которые даже отдалённо не напоминают латынь. Если вам нужен Lorem Ipsum для серьёзного проекта, вы наверняка не хотите какой-нибудь шутки, скрытой в середине абзаца. Также все другие известные генераторы Lorem Ipsum используют один и тот же текст, который они просто повторяют, пока не достигнут нужный объём."
+        tools:text="Есть много вариантов Lorem Ipsum, но большинство из них имеет не всегда приемлемые модификации"
         />
     <TextView
         android:id="@+id/commentTime"

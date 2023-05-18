@@ -44,8 +44,6 @@ public class ArticleActivity extends AppCompatActivity {
         numberStart = true;
     }
 
-
-
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +67,6 @@ public class ArticleActivity extends AppCompatActivity {
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
 
-
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("allArticles");
         databaseReference1.child(articleID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -89,8 +86,20 @@ public class ArticleActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+//        Скрываем кнопку если пользователь не авторизован
+        if (!LoginActivity.isUserLoggedIn()) {
+            binding.commentAddBtn.setVisibility(View.GONE);
+        }
+//      Переход в создание комментария
+        binding.commentAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ArticleActivity.this, AddCommentActivity.class);
+                intent.putExtra("uniqueID", articleID);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 //        Comments section
         commentsDB = FirebaseDatabase.getInstance().getReference("allComments");
@@ -114,6 +123,7 @@ public class ArticleActivity extends AppCompatActivity {
             }
         });
         if (numberStart) commentsAdapterCall();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

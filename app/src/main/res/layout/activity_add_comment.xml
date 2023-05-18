@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/default_horiz_padding"
+    tools:context=".AddCommentActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Оставить комментарий к статье"
+        android:textAlignment="center"
+        android:layout_marginBottom="20dp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/mainComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="Текст комментария"
+        tools:layout_editor_absoluteX="20dp"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/addTaskRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Полезность статьи"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/backBtn"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addCommentNotice"
+        android:textSize="12sp"
+        android:text="Оцените, была ли полезна инструкция, по шкале от 1 до 5"
+        />
+
+
+    <Button
+        android:id="@+id/addCommentBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отправить"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

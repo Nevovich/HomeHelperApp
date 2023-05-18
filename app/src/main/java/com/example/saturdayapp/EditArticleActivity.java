@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.saturdayapp.databinding.ActivityEditArticleBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +56,7 @@ public class EditArticleActivity extends AppCompatActivity {
                     binding.editArticleLink.setText("youtu.be/" + ds.child("videoLink").getValue().toString());
                     articleAuthorID = ds.child("authorID").getValue().toString();
                     articleTime = ds.child("articleTaskTime").getValue(Integer.class);
-                    binding.editArticleTime.setText(articleTime);
+                    binding.editArticleTime.setText(articleTime.toString());
                 }
             }
             @Override
@@ -82,7 +83,6 @@ public class EditArticleActivity extends AppCompatActivity {
                     map.put("articleTaskTime", articleTime);
                     map.put("videoLink", articleVideoLink.subSequence(articleVideoLink.length()-11, articleVideoLink.length()).toString());
                     articleDB.updateChildren(map);
-//                    articleDB.push().setValue(articleToAdd);
                     startActivity(intent);
                     finish();
                 } else {
