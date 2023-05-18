@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-
+//                                      Сохранение uid зарегистрированного пользователя
                                         loginUID = task.getResult().getUser().getUid();
                                         LoginActivity.setLoggedInUserUID(loginUID);
 //                                        Push в базу данных вместе с ником
