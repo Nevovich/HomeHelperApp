@@ -67,7 +67,7 @@ public class SearchFragment extends Fragment {
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                articleSearchQuery = binding.searchView.getQuery().toString().toLowerCase(Locale.ROOT);
+                    articleSearchQuery = binding.searchView.getQuery().toString().toLowerCase(Locale.ROOT);
                     articleDB = FirebaseDatabase.getInstance().getReference(LIST_KEY);
                     articleDB.addValueEventListener(new ValueEventListener() {
                         @Override

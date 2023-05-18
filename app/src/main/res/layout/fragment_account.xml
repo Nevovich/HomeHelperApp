@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="20dp"
     android:paddingHorizontal="@dimen/default_horiz_padding"
     android:layout_marginBottom="?attr/actionBarSize"
     android:orientation="vertical">
@@ -11,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="60dp"
+        android:paddingTop="30dp"
         android:id="@+id/unauthorizedUserText"
         android:text="Вход в аккаунт не выполнен. Нажмите для авторизации"
         android:textSize="24sp"
@@ -24,14 +25,15 @@
         android:text="Настройки"
         android:textSize="32sp"
         android:textStyle="bold"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="@dimen/default_horiz_padding"
-        android:layout_height="1dp"
-        android:background="@color/purple_200"/>
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_marginHorizontal="@dimen/default_horiz_padding"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="@color/purple_200"/>-->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,4 +52,17 @@
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+    <TextView
+        android:id="@+id/myArticlesHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ваши статьи"
+        android:textSize="32sp"
+        android:textStyle="bold"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/accountRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize"
+        tools:listitem="@layout/list_item"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -12,7 +12,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/createHeader"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="Создание новой статьи"
@@ -28,7 +27,6 @@
         android:layout_marginBottom="16dp"
         android:hint="Заголовок статьи"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/createDescription"
         tools:layout_editor_absoluteX="20dp" />
 
     <EditText
@@ -37,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Описание статьи"
-        app:layout_constraintBottom_toTopOf="@+id/createLink"
         tools:layout_editor_absoluteX="20dp"
         android:inputType="textMultiLine" />
 
@@ -47,16 +44,25 @@
         android:layout_height="wrap_content"
         android:hint="Ссылка на видеоинструкцию"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/backBtn"
         />
     <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/createLinkNotice"
+    app:layout_constraintTop_toBottomOf="@id/createLink"
+    android:textSize="12sp"
+    android:text="В формате youtube.com/watch?v=dQw4w9WgXcQ \nили youtu.be/dQw4w9WgXcQ"
+    />
+    <EditText
+        android:id="@+id/createTaskTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/createLinkNotice"
-        app:layout_constraintTop_toBottomOf="@id/createLink"
-        android:textSize="12sp"
-        android:text="В формате youtube.com/watch?v=dQw4w9WgXcQ \nили youtu.be/dQw4w9WgXcQ"
+        android:hint="Примерное время выполнения"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/backBtn"
         />
+
     <Button
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"

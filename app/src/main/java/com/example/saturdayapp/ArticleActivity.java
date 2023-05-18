@@ -27,6 +27,7 @@ public class ArticleActivity extends AppCompatActivity {
     private ActivityArticleBinding binding;
     private String articleAuthorID, articleVideoLink, articleID;
     WebView youtubeWebView;
+    private Integer articleTaskTime;
 
 
 
@@ -66,7 +67,9 @@ public class ArticleActivity extends AppCompatActivity {
                         youtubeWebView.loadUrl("https://www.youtube.com/embed/" + articleVideoLink);
                         articleVideoLink = binding.videolinkAnnotation.getText() + articleVideoLink;
                         binding.videolinkAnnotation.setText(articleVideoLink);
-                        articleAuthorID = ds.child("authorID").getValue().toString();
+                        articleAuthorID = ds.child("authorID").getValue(String.class);
+                        articleTaskTime = ds.child("articleTaskTime").getValue(Integer.class);
+                        binding.taskTime.setText(articleTaskTime + " мин.");
                 }
             }
             @Override

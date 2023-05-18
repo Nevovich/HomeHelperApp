@@ -26,6 +26,7 @@ public class EditArticleActivity extends AppCompatActivity {
     private String articleAuthorID, articleHeader, articleDescription, articleVideoLink, articleID;
     private DatabaseReference articleDB;
     private final String LIST_KEY = "allArticles";
+    private Integer articleTime;
 
     List<ListEntity> articleToAdd = new ArrayList<>();
 
@@ -53,6 +54,8 @@ public class EditArticleActivity extends AppCompatActivity {
                     binding.editArticleDescription.setText(ds.child("description").getValue().toString());
                     binding.editArticleLink.setText("youtu.be/" + ds.child("videoLink").getValue().toString());
                     articleAuthorID = ds.child("authorID").getValue().toString();
+                    articleTime = ds.child("articleTaskTime").getValue(Integer.class);
+                    binding.editArticleTime.setText(articleTime);
                 }
             }
             @Override
@@ -66,22 +69,17 @@ public class EditArticleActivity extends AppCompatActivity {
                 articleHeader = String.valueOf(binding.editArticleHeader.getText());
                 articleDescription = String.valueOf(binding.editArticleDescription.getText());
                 articleVideoLink = String.valueOf(binding.editArticleLink.getText());
+                articleTime = Integer.parseInt(binding.editArticleTime.getText().toString());
                 if (!articleDescription.isEmpty() &
                         !articleHeader.isEmpty() &
                         (articleVideoLink.contains("youtu.be/") |
                                 articleVideoLink.contains("youtube.com/watch?v="))) {
                     articleDB = FirebaseDatabase.getInstance().getReference(LIST_KEY).child(articleID).child("0");
-//                    articleToAdd.add(new ListEntity( articleDB.getKey(),
-//                            articleHeader,
-//                            articleDescription,
-//                            articleVideoLink.subSequence(articleVideoLink.length()-11, articleVideoLink.length()).toString(),
-//                            LoginActivity.getLoggedInUserUID()
-//                    ));
 //                Загрузка на сервер данных
-
                     HashMap map = new HashMap();
                     map.put("description", articleDescription);
                     map.put("header", articleHeader);
+                    map.put("articleTaskTime", articleTime);
                     map.put("videoLink", articleVideoLink.subSequence(articleVideoLink.length()-11, articleVideoLink.length()).toString());
                     articleDB.updateChildren(map);
 //                    articleDB.push().setValue(articleToAdd);

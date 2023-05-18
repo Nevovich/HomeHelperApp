@@ -57,6 +57,14 @@
         android:textSize="12sp"
         android:text="В формате youtube.com/watch?v=dQw4w9WgXcQ \nили youtu.be/dQw4w9WgXcQ"
         />
+    <EditText
+        android:id="@+id/editArticleTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Примерное время выполнения"
+        android:inputType="number"
+        android:minHeight="48dp"
+        />
     <Button
         android:id="@+id/confirmEditBtn"
         android:layout_width="wrap_content"

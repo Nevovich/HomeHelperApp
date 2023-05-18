@@ -24,6 +24,7 @@ public class CreateActivity extends AppCompatActivity {
     private final String LIST_KEY = "allArticles";
 
     String articleHeader, articleDescription, articleVideoLink;
+    Integer articleTaskTime;
 
     List<ListEntity> articleToAdd = new ArrayList<>();
     @Override
@@ -39,6 +40,7 @@ public class CreateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CreateActivity.this, MainActivity.class);
                 articleHeader = String.valueOf(binding.createHeader.getText());
+                articleTaskTime = Integer.parseInt(binding.createTaskTime.getText().toString());
                 articleDescription = String.valueOf(binding.createDescription.getText());
                 articleVideoLink = String.valueOf(binding.createLink.getText());
                 if (!articleDescription.isEmpty() &
@@ -50,7 +52,8 @@ public class CreateActivity extends AppCompatActivity {
                             articleHeader,
                             articleDescription,
                             articleVideoLink.subSequence(articleVideoLink.length()-11, articleVideoLink.length()).toString(),
-                            LoginActivity.getLoggedInUserUID()
+                            LoginActivity.getLoggedInUserUID(),
+                            articleTaskTime
                     ));
 //                Загрузка на сервер данных
                     articleDB.push().setValue(articleToAdd);
