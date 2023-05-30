@@ -7,29 +7,30 @@
     android:orientation="vertical"
     tools:context=".ArticleActivity"
     android:paddingHorizontal="@dimen/default_horiz_padding">
-
+    <TextView
+        android:id="@+id/articleHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Заголовок статьи"
+        android:layout_marginTop="32dp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical">
-        <TextView
-            android:id="@+id/articleHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Заголовок статьи"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingVertical="2dp"
             android:paddingHorizontal="5dp"
-            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/indigo_200"
             android:background="@drawable/round_corners">
             <ImageView
                 android:layout_width="wrap_content"
@@ -41,9 +42,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/black"
                 android:layout_marginLeft="4dp"
                 android:text="5 мин."
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="2dp"
+            android:paddingHorizontal="5dp"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/indigo_200"
+            android:background="@drawable/round_corners">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_author"
+                />
+            <TextView
+                android:id="@+id/articleAuthorLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="4dp"
                 />
         </LinearLayout>
 
@@ -100,7 +122,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/teal_700"
+            android:backgroundTint="@color/indigo_700"
             android:text="Оценить"
             android:textSize="12sp" />
     </androidx.constraintlayout.widget.ConstraintLayout>

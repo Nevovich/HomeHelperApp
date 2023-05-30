@@ -56,11 +56,13 @@ public class AddCommentActivity extends AppCompatActivity {
 //                Загрузка на сервер данных
                             CommentsEntity map = new CommentsEntity(mainCommentText, authorNickName, addCommentTime, commentRate, articleID);
 //                    Toast.makeText(AddCommentActivity.this, authorNickName + map.getArticleRate(), Toast.LENGTH_SHORT).show();
+
                             commentsDB.push().setValue(map);
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
+                    ArticleActivity.numberStart = false;
                     startActivity(intent);
                     finish();
                 }

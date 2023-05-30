@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
     android:id="@+id/action_bar_edit_article"
-    android:title="Изменить статью">
-</item>
+    android:title="Изменить статью"/>
+    <item
+    android:id="@+id/action_bar_delete_article"
+    android:title="Удалить статью"/>
+
 </menu>

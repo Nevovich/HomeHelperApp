@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class EditArticleActivity extends AppCompatActivity {
 
@@ -55,7 +58,7 @@ public class EditArticleActivity extends AppCompatActivity {
                     binding.editArticleDescription.setText(ds.child("description").getValue().toString());
                     binding.editArticleLink.setText("youtu.be/" + ds.child("videoLink").getValue().toString());
                     articleAuthorID = ds.child("authorID").getValue().toString();
-                    articleTime = ds.child("articleTaskTime").getValue(Integer.class);
+                    articleTime = ds.child("taskTime").getValue(Integer.class);
                     binding.editArticleTime.setText(articleTime.toString());
                 }
             }
@@ -71,7 +74,7 @@ public class EditArticleActivity extends AppCompatActivity {
                 articleDescription = String.valueOf(binding.editArticleDescription.getText());
                 articleVideoLink = String.valueOf(binding.editArticleLink.getText());
                 articleTime = Integer.parseInt(binding.editArticleTime.getText().toString());
-                if (!articleDescription.isEmpty() &
+                if (articleTime >= 0 & articleTime <= 1000 & !articleDescription.isEmpty() &
                         !articleHeader.isEmpty() &
                         (articleVideoLink.contains("youtu.be/") |
                                 articleVideoLink.contains("youtube.com/watch?v="))) {
@@ -80,7 +83,7 @@ public class EditArticleActivity extends AppCompatActivity {
                     HashMap map = new HashMap();
                     map.put("description", articleDescription);
                     map.put("header", articleHeader);
-                    map.put("articleTaskTime", articleTime);
+                    map.put("taskTime", articleTime);
                     map.put("videoLink", articleVideoLink.subSequence(articleVideoLink.length()-11, articleVideoLink.length()).toString());
                     articleDB.updateChildren(map);
                     startActivity(intent);
@@ -104,10 +107,17 @@ public class EditArticleActivity extends AppCompatActivity {
                     } else {
                         binding.editArticleLink.setBackgroundTintList(defaultTintColor);
                     }
+                    if (!(articleTime >= 0 & articleTime <= 1000) | articleTime.toString().isEmpty()) {
+                        binding.editArticleTime.setBackgroundTintList(errorTintColor);
+                    } else {
+                        binding.editArticleTime.setBackgroundTintList(defaultTintColor);
+                    }
                 }
 
             }
         });
+        Objects.requireNonNull(getSupportActionBar())
+                .setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

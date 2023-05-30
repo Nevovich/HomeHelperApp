@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.saturdayapp.databinding.ActivityCreateBinding;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +41,7 @@ public class CreateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CreateActivity.this, MainActivity.class);
                 articleHeader = String.valueOf(binding.createHeader.getText());
-                articleTaskTime = Integer.parseInt(binding.createTaskTime.getText().toString());
+                articleTaskTime = Integer.valueOf(binding.createTaskTime.getText().toString());
                 articleDescription = String.valueOf(binding.createDescription.getText());
                 articleVideoLink = String.valueOf(binding.createLink.getText());
                 if (!articleDescription.isEmpty() &

@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +19,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.example.saturdayapp.databinding.ActivityArticleBinding;
+import com.example.saturdayapp.ui.home.HomeFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +36,7 @@ public class ArticleActivity extends AppCompatActivity {
     private String articleAuthorID, articleVideoLink, articleID;
     WebView youtubeWebView;
     private Integer articleTaskTime;
-    private boolean numberStart = false;
+    public static boolean numberStart = false;
     private DatabaseReference commentsDB;
     private List<CommentsEntity> comments = new ArrayList<CommentsEntity>();
 
@@ -67,7 +71,8 @@ public class ArticleActivity extends AppCompatActivity {
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
 
-        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("allArticles");
+        FirebaseDatabase ref = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference1 = ref.getReference("allArticles");
         databaseReference1.child(articleID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,13 +84,26 @@ public class ArticleActivity extends AppCompatActivity {
                         articleVideoLink = binding.videolinkAnnotation.getText() + articleVideoLink;
                         binding.videolinkAnnotation.setText(articleVideoLink);
                         articleAuthorID = ds.child("authorID").getValue(String.class);
-                        articleTaskTime = ds.child("articleTaskTime").getValue(Integer.class);
+                        articleTaskTime = ds.child("taskTime").getValue(Integer.class);
                         binding.taskTime.setText(articleTaskTime + " мин.");
+//                        Вставляем никнейм автора
+                    ref.getReference("allUsers")
+                            .child(articleAuthorID)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    binding.articleAuthorLabel.setText(dataSnapshot.child("username").getValue(String.class));
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {}
+                            });
+//                        binding.articleAuthorLabel.setText(LoginActivity.getUserNicknameByUID(articleAuthorID));
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
+
 //        Скрываем кнопку если пользователь не авторизован
         if (!LoginActivity.isUserLoggedIn()) {
             binding.commentAddBtn.setVisibility(View.GONE);
@@ -113,7 +131,7 @@ public class ArticleActivity extends AppCompatActivity {
                             comments.add(animal);
                         }
                     }
-                if (!numberStart) commentsAdapterCall();
+                commentsAdapterCall();
             }
 
             @Override
@@ -122,7 +140,6 @@ public class ArticleActivity extends AppCompatActivity {
                 Toast.makeText(ArticleActivity.this, "Ошибка чтения БД", Toast.LENGTH_SHORT).show();
             }
         });
-        if (numberStart) commentsAdapterCall();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -147,7 +164,14 @@ public class ArticleActivity extends AppCompatActivity {
                 startActivity(intent);
                 this.finish();
                 return true;
+            case R.id.action_bar_delete_article:
+                FirebaseDatabase.getInstance()
+                        .getReference("allArticles")
+                        .child(articleID).removeValue();
+                this.finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

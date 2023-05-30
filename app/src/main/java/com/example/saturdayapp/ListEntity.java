@@ -12,11 +12,12 @@ public class ListEntity {
     }
 
     public ListEntity(String articleID, String header, String description, String videoLink, String authorID, Integer taskTime) {
-        this.articleID = articleID;
         this.header = header;
+        this.articleID = articleID;
         this.description = description;
         this.videoLink = videoLink;
         this.authorID = authorID;
+        this.taskTime = taskTime;
     }
 
     public Integer getTaskTime() {

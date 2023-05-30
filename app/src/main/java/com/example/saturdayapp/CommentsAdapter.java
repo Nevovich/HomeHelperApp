@@ -51,7 +51,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
         holder.authorNick.setText(item.getAuthorNickname());
         holder.commentText.setText(item.getMainText());
 //      Convertation to date
-        holder.commentTime.setText(new Date((item.getAddTime())*1000).toString());
+        String subCommentTime = new Date((item.getAddTime())*1000).toString().substring(4,16);
+        holder.commentTime.setText(subCommentTime);
     }
 
     // Возвращает размер списка данных, нужно для внутренней работы ресайклера
